@@ -1,17 +1,21 @@
 <h1>プロフィール</h1>
 
-<p>
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar %>
-  <% end %>
-</p>
-
-<h3>名前</h3>
-<%= @user.name %>
-
-<h3>年齢</h3>
-<%= @user.age %>
-
-<h2>メールアドレス</h2>
-
-<%= @user.email %>
+<div class="card text-center" style="width: 100%;">
+  <div class="card-header ">
+    <h4>情報</h4>
+  </div>
+  <p>
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class:"img-thumbnail"%>
+    <% end %>
+  </p>
+  
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><h4>名前: <%= @user.name %></h4></li>
+      <li class="list-group-item"><h4>年齢: <%= @user.age %></h4></li>
+      <li class="list-group-item"><h4>メールアドレス: <%= @user.email %> </h4></li>
+    </ul>
+  </div>
+  
+</div>

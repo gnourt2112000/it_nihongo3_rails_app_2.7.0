@@ -1,2 +1,9 @@
-<h1>HOMEPAGE</h1>
-<%= link_to "ゲーム一覧をみる", games_path %>
+<div class="card mt-5">
+  <h5 class="card-header text-center">ウェルカム</h5>
+  <div class="card-body">
+    <h2 class="text-center">こんにちは <%if current_user.present?%> <%= current_user.name%><%end%></h2>
+    <div class="d-flex justify-content-center mt-3">
+        <%= link_to "ゲーム一覧をみる", games_path , class:"btn btn-outline-secondary"%>
+    </div>
+  </div>
+</div>

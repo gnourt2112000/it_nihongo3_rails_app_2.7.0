@@ -5,21 +5,52 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= link_to "ホーム", root_path %>
-    <% if user_signed_in? %>
-      <p>こんにちは、<%= link_to current_user.email, users_show_path %></p>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "サインイン", new_user_session_path %>
-      <%= link_to "ユーザ登録", new_user_registration_path %>
-    <% end %>
-    <hr> 
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <div class="container-fluid">
+        <%= link_to "ゲームレビュー", root_path, class:"navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+               <%= link_to "ホーム", root_path, class:"nav-link active fs-6" %>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "プロファイル"  , users_show_path , class:"nav-link active fs-6" %>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to current_user.name, users_show_path, class:"nav-link active fs-6"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-outline-light"%>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "サインイン", new_user_session_path, class:"btn btn-outline-light me-1 mb-1"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ユーザ登録", new_user_registration_path, class:"btn btn-outline-light" %>
+              </li>
+            <% end %>  
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

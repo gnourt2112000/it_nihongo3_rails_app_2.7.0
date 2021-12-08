@@ -1,40 +1,52 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @game.title %>
-</p>
+<div class="card">
+  <div class="card-header text-center fs-4">
+      <%= @game.title %>
+  </div>
+  <div class="card-body">
+    <p>
+      <strong>Number of part:</strong>
+      <%= @game.number_of_part %>
+    </p>
 
-<p>
-  <strong>Number of part:</strong>
-  <%= @game.number_of_part %>
-</p>
+    <p>
+      <strong>Detail:</strong>
+      <%= @game.detail %>
+    </p>
 
-<p>
-   <% if @game.image.attached? %>
-     <%= image_tag @game.image %>
-   <% end %>
-</p>
+    <p>
+      <% if @game.image.attached? %>
+        <%= image_tag @game.image ,class:"img-thumbnail"%>
+      <% end %>
+    </p>
+  </div>
+</div>
 
 <h2>Review From</h2>
 <%= form_with(model: @game_review, local: true) do |form| %>
   <div class= "field">
-    <%= form.text_area :review %>
+    <%= form.text_area :review ,class:"form-control"%>
     <%= form.hidden_field :game_id, :value => @game.id %>
   </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit"Create review", class:"btn btn-danger"%>
   </div>
 <% end %>
 
 <h2>Review List</h2>
-<ul>
-  <% @game.game_review.each do |game_review|%>
-   <li><%= game_review.review %>
-        (<i><%= game_review.user.name %></i>)</li>
-   <% end %>
-</ul>
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+  <% @game.game_review.each do |game_review|%>
+    <div class="card mb-2">
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p class="fs-6 mb-4"><%= game_review.review %></p>
+          <footer class="blockquote-footer"><i><%= game_review.user.name if game_review.user%></i></footer>
+        </blockquote>
+      </div>
+    </div>
+   <% end %>
+
+
+<%= link_to 'Edit', edit_game_path(@game)  , class:"btn btn-outline-secondary"%>
+<%= link_to 'Back', games_path , class:"btn btn-outline-secondary"%>
