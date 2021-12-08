@@ -32,8 +32,8 @@
 <ul>
   <% @game.game_review.each do |game_review|%>
    <li><%= game_review.review %>
-     (<i><%= game_review.user_id %></i>)</li>
-<% end %>
+        (<i><%= game_review.user.name %></i>)</li>
+   <% end %>
 </ul>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
