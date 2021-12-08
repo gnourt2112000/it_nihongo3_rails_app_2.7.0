@@ -14,7 +14,27 @@
    <% if @game.image.attached? %>
      <%= image_tag @game.image %>
    <% end %>
- </p>
+</p>
+
+<h2>Review From</h2>
+<%= form_with(model: @game_review, local: true) do |form| %>
+  <div class= "field">
+    <%= form.text_area :review %>
+    <%= form.hidden_field :game_id, :value => @game.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<h2>Review List</h2>
+<ul>
+  <% @game.game_review.each do |game_review|%>
+   <li><%= game_review.review %>
+     (<i><%= game_review.user_id %></i>)</li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
